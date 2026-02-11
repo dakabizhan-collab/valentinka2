@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Жаныма ❤️</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  overflow:hidden;
+  font-family:'Cormorant Garamond', serif;
+  background: linear-gradient(135deg,#ffd1dc,#ffe4e1);
+}
+
+/* Жүректер ұшу */
+.heart{
+  position:absolute;
+  bottom:-20px;
+  font-size:20px;
+  animation:floatUp linear forwards;
+  opacity:0.8;
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(0) scale(1);opacity:0;}
+  20%{opacity:1;}
+  100%{transform:translateY(-110vh) scale(1.5);opacity:0;}
+}
+
+/* 1-бет */
+.page{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+}
+
+.question{
+  font-family:'Marck Script', cursive;
+  font-size:48px;
+  color:#b3003c;
+  margin-bottom:40px;
+}
+
+.btn{
+  padding:15px 35px;
+  font-size:20px;
+  border:none;
+  border-radius:30px;
+  background:#fff;
+  color:#b3003c;
+  cursor:pointer;
+  margin:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:scale(1.1);
+}
+
+/* 2-бет: Конверт беті */
+.letter-page{
+  display:none;
+  height:100vh;
+  justify-content:center;
+  align-items:center;
+  background:#f8f1e7;
+  position:relative;
+  overflow:hidden;
+  flex-direction:column;
+}
+
+/* Конверт */
+.envelope{
+  width:320px;
+  height:220px;
+  background:#c94f7c;
+  border-radius:6px;
+  cursor:pointer;
+  position:relative;
+  transition:1s;
+  margin-bottom:20px;
+}
+
+.envelope:before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  border-left:160px solid transparent;
+  border-right:160px solid transparent;
+  border-top:110px solid #a63d64;
+  transform-origin:top;
+  transition:1s;
+}
+
+.envelope.open:before{
+  transform: rotateX(180deg);
+}
+
+/* Хат */
+.letter{
+  position:absolute;
+  width:90%;
+  max-width:700px;
+  background:#fffdf8;
+  padding:50px 40px;
+  border-radius:8px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.3);
+  top:50%;
+  left:50%;
+  transform:translate(-50%, 100%);
+  opacity:0;
+  transition:1.2s;
+}
+
+/* Конверт ашылғанда хат шығады */
+.envelope.open + .letter{
+  transform:translate(-50%, -50%);
+  opacity:1;
+}
+
+/* Стрелка 3-бетке өту */
+.next-arrow{
+  font-size:40px;
+  color:#b3003c;
+  cursor:pointer;
+  transition:0.3s;
+  position:absolute;
+  bottom:20px;  /* төменге орналастыру */
+  right:20px;   /* оң жақ шетке орналастыру */
+}
+
+.next-arrow:hover{
+  transform:scale(1.3);
+}
+
+/* 3-бет махаббат мәтіні */
+#page3{
+  display:none;
+  height:100vh;
+  width:100%;
+  position:relative;
+  background:#fff0f5;
+}
+
+#page3 .letter{
+  background:#fffaf0;
+  padding:40px 35px;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  max-width:600px;
+  width:90%;
+  text-align:center;
+  line-height:1.8;
+  font-family:'Marck Script', cursive;
+  font-size:24px;
+  color:#b22222;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  opacity:1;
+}
+</style>
+</head>
+<body>
+
+<!-- 1-бет -->
+<div class="page" id="page1">
+  <div class="question">Сен менің валентинім боласың ба? ❤️</div>
+  <div>
+    <button class="btn" onclick="openLetterPage()">Иә</button>
+    <button class="btn" onclick="openLetterPage()">Иә</button>
+  </div>
+</div>
+
+<!-- 2-бет: Конверт + хат -->
+<div class="letter-page" id="page2">
+  <div class="envelope" id="envelope" onclick="openEnvelope()"></div>
+  <div class="letter" id="shortLetter">
+    <p><b>Жүрегіме жақын жаным,</b></p>
+    <p>14 ақпан – махаббаттың, сезімнің, ерекше көңілдің күні. Осы әдемі мерекеде сені романтикалық кешке шақырғым келеді.</p>
+    <p>Бұл кеш тек екеумізге арналады… Жылы әңгіме, әдемі сәттер, тәтті күлкі және жүрекке жақын атмосфера.</p>
+    <p>📅 Күні: 14.02.2026<br>🕖 Уақыты: 19:00<br>📍 Мекенжайы: Назарбаева 103</p>
+    <p>Сол кеште сенің жаныңда болып, тағы бір рет сені таңдағаныма қуанып отырғым келеді. ❤️</p>
+  </div>
+
+  <!-- Стрелка 3-бетке өту -->
+  <div class="next-arrow" onclick="goToPage3()">➡️</div>
+</div>
+
+<!-- 3-бет махаббат мәтіні -->
+<div class="letter-page" id="page3">
+  <div class="letter">
+    <p>Сен менің өмірімдегі ең ерекше адамсың.</p>
+    <p>Жаныңда болған сайын өзімді қауіпсіз әрі бақытты сезінемін.</p>
+    <p>Күлкің, мінезің, маған деген қамқорлығың — бәрі жүрегіме жақын.</p>
+    <p>Сені кездестіргенім — тағдырымның ең әдемі сыйы. ❤️</p>
+    <p><i>«Ал сен келіп, махаббатты үйіп бердің</i></p>
+    <p><i>Сол үшін де, аман жүрші кейіпкерім»</i></p>
+    <div class="signature">Ізгі ниетпен: сенің жаның ,круласаның ,пудраң ,өмірің💋</div>
+  </div>
+</div>
+
+<!-- Музыка -->
+<audio id="music" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("music");
+
+// 1-беттен 2-бетке өту
+function openLetterPage(){
+  document.getElementById("page1").style.display="none";
+  document.getElementById("page2").style.display="flex";
+  startHearts();
+}
+
+// Конверт ашу, музыка ойнату
+function openEnvelope(){
+  document.getElementById("envelope").classList.add("open"); // конверт ашылады
+  music.play().catch(() => alert("Музыка тек конвертті басқаннан кейін ойнатылады"));
+}
+// Стрелка арқылы 3-бетке өту
+function goToPage3(){
+  document.getElementById("page2").style.display="none";
+  document.getElementById("page3").style.display="flex";
+}
+
+// Жүректер ұшу
+function startHearts(){
+  setInterval(()=>{
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(Math.random()*4+4)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),8000);
+  },400);
+}
+</script>
+
+</body>
+</html>
